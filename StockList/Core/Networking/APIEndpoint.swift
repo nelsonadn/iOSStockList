@@ -11,6 +11,15 @@ enum APIEndpoint {
     case marketSummary
     case stockSummary(symbol: String)
 
+    var url: URL? {
+        guard var components = URLComponents(url: Constants.baseURL, resolvingAgainstBaseURL: false) else {
+            return nil
+        }
+        components.path = path
+        components.queryItems = queryItems
+        return components.url
+    }
+
     var path: String {
         switch self {
         case .marketSummary:
