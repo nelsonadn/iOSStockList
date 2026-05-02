@@ -15,6 +15,8 @@ enum Theme {
         static let secondaryText = Color.secondary
         static let positive = Color.green
         static let negative = Color.red
+        static let positiveText = Color.white
+        static let negativeText = Color.white
     }
 
     enum Fonts {
