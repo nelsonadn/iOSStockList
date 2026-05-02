@@ -47,6 +47,9 @@ struct MarketListView: View {
             }
             .padding()
         }
+        .task {
+            await viewModel.loadQuotes()
+        }
     }
 }
 
