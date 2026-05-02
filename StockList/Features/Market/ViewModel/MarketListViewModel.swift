@@ -10,13 +10,8 @@ import Combine
 
 @MainActor
 final class MarketListViewModel: ObservableObject {
-    private let apiClient: APIClient
     @Published private(set) var quotes: [StockQuote] = []
     @Published var searchText: String = ""
-
-    init(apiClient: APIClient = APIClient()) {
-        self.apiClient = apiClient
-    }
 
     var filteredQuotes: [StockQuote] {
         guard !searchText.isEmpty else { return quotes }
@@ -32,6 +27,7 @@ final class MarketListViewModel: ObservableObject {
 
     func loadQuotes() async {
         guard let url = APIEndpoint.marketSummary.url else { return }
+        let apiClient = APIClient()
 
         do {
             let data = try await apiClient.fetchData(

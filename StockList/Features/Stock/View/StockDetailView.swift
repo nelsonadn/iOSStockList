@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StockDetailView: View {
+    let detail: StockDetail
     @StateObject private var viewModel = StockDetailViewModel()
 
     var body: some View {
@@ -41,6 +42,9 @@ struct StockDetailView: View {
                 }
             }
             .padding()
+        }
+        .task {
+            viewModel.setDetail(detail)
         }
     }
 

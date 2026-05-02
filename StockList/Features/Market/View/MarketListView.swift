@@ -23,25 +23,44 @@ struct MarketListView: View {
                     .textFieldStyle(.roundedBorder)
 
                 List(viewModel.filteredQuotes) { quote in
-                    VStack(alignment: .leading, spacing: Theme.Spacing.xs) {
-                        HStack {
-                            Text(quote.name)
-                                .font(.headline)
-                            Spacer()
-                            Text(Formatters.currency(quote.price))
-                                .font(.headline)
-                        }
+                    NavigationLink {
+                        StockDetailView(
+                            detail: StockDetail(
+                                symbol: quote.symbol,
+                                name: quote.name,
+                                price: quote.price,
+                                change: quote.change,
+                                open: nil,
+                                previousClose: nil,
+                                dayRange: nil,
+                                volume: nil,
+                                averageVolume3Month: nil,
+                                fiftyTwoWeekRange: nil,
+                                marketState: "-",
+                                updatedAt: nil
+                            )
+                        )
+                    } label: {
+                        VStack(alignment: .leading, spacing: Theme.Spacing.xs) {
+                            HStack {
+                                Text(quote.name)
+                                    .font(.headline)
+                                Spacer()
+                                Text(Formatters.currency(quote.price))
+                                    .font(.headline)
+                            }
 
-                        HStack {
-                            Text(quote.symbol)
-                                .font(.subheadline)
-                                .foregroundStyle(Theme.Colors.secondaryText)
-                            Spacer()
-                            Text(Formatters.change(quote.change))
-                                .foregroundStyle(quote.change >= 0 ? Theme.Colors.positive : Theme.Colors.negative)
+                            HStack {
+                                Text(quote.symbol)
+                                    .font(.subheadline)
+                                    .foregroundStyle(Theme.Colors.secondaryText)
+                                Spacer()
+                                Text(Formatters.change(quote.change))
+                                    .foregroundStyle(quote.change >= 0 ? Theme.Colors.positive : Theme.Colors.negative)
+                            }
                         }
+                        .padding(.vertical, Theme.Spacing.xs)
                     }
-                    .padding(.vertical, Theme.Spacing.xs)
                 }
                 .listStyle(.plain)
             }
