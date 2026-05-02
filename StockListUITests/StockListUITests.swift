@@ -23,12 +23,19 @@ final class StockListUITests: XCTestCase {
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testOpenDetailFromMarketList() throws {
         let app = XCUIApplication()
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let searchField = app.textFields["market.searchField"]
+        XCTAssertTrue(searchField.waitForExistence(timeout: 10))
+
+        let firstRow = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "market.row.")).firstMatch
+        XCTAssertTrue(firstRow.waitForExistence(timeout: 10))
+        firstRow.tap()
+
+        let detailName = app.staticTexts["detail.name"]
+        XCTAssertTrue(detailName.waitForExistence(timeout: 10))
     }
 
     @MainActor
