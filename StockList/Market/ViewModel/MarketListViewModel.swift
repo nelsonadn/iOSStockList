@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 @MainActor
-final class MarketListViewModel {
+final class MarketListViewModel: ObservableObject {
     @Published private(set) var quotes: [StockQuote] = []
     @Published var searchText: String = ""
 
