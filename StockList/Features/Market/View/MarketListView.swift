@@ -29,6 +29,9 @@ struct MarketListView: View {
 
                 TextField("Search stocks by name", text: $viewModel.searchText)
                     .textFieldStyle(.roundedBorder)
+                    .onTapGesture {
+                        dismissKeyboard()
+                    }
 
                 List(viewModel.filteredQuotes) { quote in
                     NavigationLink {
@@ -76,11 +79,6 @@ struct MarketListView: View {
                     }
                 }
                 .listStyle(.plain)
-                .simultaneousGesture(
-                    TapGesture().onEnded {
-                        dismissKeyboard()
-                    }
-                )
             }
             .padding()
             .overlay(alignment: .topTrailing) {
