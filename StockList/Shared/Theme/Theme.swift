@@ -20,11 +20,12 @@ enum Theme {
     }
 
     enum Fonts {
-        static let title = Font.largeTitle.weight(.bold)
-        static let subtitle = Font.subheadline
-        static let body = Font.body
-        static let caption = Font.caption
-        static let metric = Font.title3.weight(.semibold)
+        static let title = Font.custom("Avenir Next", size: 34).weight(.bold)
+        static let headline = Font.custom("Avenir Next", size: 20).weight(.semibold)
+        static let subtitle = Font.custom("Avenir Next", size: 16)
+        static let body = Font.custom("Avenir Next", size: 17)
+        static let caption = Font.custom("Avenir Next", size: 13)
+        static let metric = Font.custom("Avenir Next", size: 22).weight(.semibold)
     }
 
     enum Spacing {
