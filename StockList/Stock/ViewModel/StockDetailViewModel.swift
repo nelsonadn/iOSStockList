@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 @MainActor
-final class StockDetailViewModel {
+final class StockDetailViewModel: ObservableObject {
     @Published private(set) var detail: StockDetail?
     @Published private(set) var isLoading = false
 
