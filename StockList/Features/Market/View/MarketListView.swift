@@ -76,13 +76,13 @@ struct MarketListView: View {
                     }
                 }
                 .listStyle(.plain)
+                .simultaneousGesture(
+                    TapGesture().onEnded {
+                        dismissKeyboard()
+                    }
+                )
             }
             .padding()
-            .simultaneousGesture(
-                TapGesture().onEnded {
-                    dismissKeyboard()
-                }
-            )
             .overlay(alignment: .topTrailing) {
                 if viewModel.isLoading {
                     ProgressView()
