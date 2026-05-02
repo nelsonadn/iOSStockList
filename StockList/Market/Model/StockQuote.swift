@@ -8,7 +8,10 @@
 import Foundation
 
 struct StockQuote: Identifiable, Equatable {
-    let id: String
     let symbol: String
     let name: String
+    let price: Double
+    let change: Double
+
+    var id: String { symbol }
 }

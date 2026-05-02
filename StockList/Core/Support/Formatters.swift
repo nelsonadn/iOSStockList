@@ -8,4 +8,13 @@
 import Foundation
 
 enum Formatters {
+    static func currency(_ value: Double?) -> String {
+        guard let value else { return "-" }
+        return value.formatted(.number.precision(.fractionLength(2)))
+    }
+
+    static func percent(_ value: Double?) -> String {
+        guard let value else { return "-" }
+        return value.formatted(.number.precision(.fractionLength(2))) + "%"
+    }
 }
