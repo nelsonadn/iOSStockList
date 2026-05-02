@@ -18,19 +18,20 @@ struct StockMetricRowView: View {
                 .font(Theme.Fonts.body)
                 .foregroundStyle(Theme.Colors.primaryText)
             Spacer()
-            Text(value)
-                .font(.caption.bold())
-                .padding(.horizontal, Theme.Spacing.sm)
-                .padding(.vertical, Theme.Spacing.xs)
-                .background(backgroundColor)
-                .foregroundStyle(.white)
-                .clipShape(Capsule())
+            if let isPositive {
+                Text(value)
+                    .font(.caption.bold())
+                    .padding(.horizontal, Theme.Spacing.sm)
+                    .padding(.vertical, Theme.Spacing.xs)
+                    .background(isPositive ? Theme.Colors.positive : Theme.Colors.negative)
+                    .foregroundStyle(.white)
+                    .clipShape(Capsule())
+            } else {
+                Text(value)
+                    .font(.headline)
+                    .foregroundStyle(Theme.Colors.secondaryText)
+            }
         }
         .padding(.vertical, Theme.Spacing.sm)
-    }
-
-    private var backgroundColor: Color {
-        guard let isPositive else { return Theme.Colors.secondaryBackground }
-        return isPositive ? Theme.Colors.positive : Theme.Colors.negative
     }
 }

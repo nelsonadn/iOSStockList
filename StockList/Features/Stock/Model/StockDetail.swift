@@ -12,6 +12,7 @@ struct StockDetail: Equatable {
     let name: String
     let price: Double
     let change: Double
+    let changePercent: Double
     let open: Double?
     let previousClose: Double?
     let dayRange: String?
@@ -20,4 +21,22 @@ struct StockDetail: Equatable {
     let fiftyTwoWeekRange: String?
     let marketState: String
     let updatedAt: Date?
+
+    static func placeholder(symbol: String, name: String) -> StockDetail {
+        StockDetail(
+            symbol: symbol,
+            name: name,
+            price: 0,
+            change: 0,
+            changePercent: 0,
+            open: nil,
+            previousClose: nil,
+            dayRange: nil,
+            volume: nil,
+            averageVolume3Month: nil,
+            fiftyTwoWeekRange: nil,
+            marketState: "-",
+            updatedAt: nil
+        )
+    }
 }
