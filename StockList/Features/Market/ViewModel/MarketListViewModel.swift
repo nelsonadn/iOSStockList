@@ -52,13 +52,15 @@ final class MarketListViewModel: ObservableObject {
 
             quotes = response.marketSummaryResponse.result.compactMap { item in
                 guard let price = item.regularMarketPrice?.raw,
-                      let change = item.regularMarketChange?.raw else { return nil }
+                      let change = item.regularMarketChange?.raw,
+                      let changePercent = item.regularMarketChangePercent?.raw else { return nil }
 
                 return StockQuote(
                     symbol: item.symbol,
                     name: item.shortName ?? item.longName ?? item.symbol,
                     price: price,
-                    change: change
+                    change: change,
+                    changePercent: changePercent
                 )
             }
         } catch {

@@ -12,6 +12,7 @@ struct StockQuote: Identifiable, Equatable {
     let name: String
     let price: Double
     let change: Double
+    let changePercent: Double
 
     var id: String { symbol }
 }

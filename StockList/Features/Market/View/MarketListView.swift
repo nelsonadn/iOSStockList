@@ -41,6 +41,7 @@ struct MarketListView: View {
                                 name: quote.name,
                                 price: quote.price,
                                 change: quote.change,
+                                changePercent: quote.changePercent,
                                 open: nil,
                                 previousClose: nil,
                                 dayRange: nil,
@@ -66,13 +67,16 @@ struct MarketListView: View {
                                     .font(.subheadline)
                                     .foregroundStyle(Theme.Colors.secondaryText)
                                 Spacer()
-                                Text(Formatters.change(quote.change))
-                                    .font(.caption.bold())
-                                    .padding(.horizontal, Theme.Spacing.sm)
-                                    .padding(.vertical, Theme.Spacing.xs)
-                                    .background(quote.change >= 0 ? Theme.Colors.positive : Theme.Colors.negative)
-                                    .foregroundStyle(quote.change >= 0 ? Theme.Colors.positiveText : Theme.Colors.negativeText)
-                                    .clipShape(Capsule())
+                                HStack(spacing: Theme.Spacing.xs) {
+                                    Text(Formatters.change(quote.change))
+                                    Text(Formatters.percent(quote.changePercent))
+                                }
+                                .font(.caption.bold())
+                                .padding(.horizontal, Theme.Spacing.sm)
+                                .padding(.vertical, Theme.Spacing.xs)
+                                .background(quote.change >= 0 ? Theme.Colors.positive : Theme.Colors.negative)
+                                .foregroundStyle(.white)
+                                .clipShape(Capsule())
                             }
                         }
                         .padding(.vertical, Theme.Spacing.xs)
