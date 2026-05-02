@@ -43,7 +43,7 @@ final class StockDetailViewModel: ObservableObject {
         isLoading = false
     }
 
-    static func map(
+    nonisolated static func map(
         response: StockDetailDataTransferObject,
         symbol: String,
         fallbackName: String

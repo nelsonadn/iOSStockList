@@ -23,8 +23,8 @@ struct StockMetricRowView: View {
                     .font(.caption.bold())
                     .padding(.horizontal, Theme.Spacing.sm)
                     .padding(.vertical, Theme.Spacing.xs)
-                    .background(isPositive ? Theme.Colors.positive : Theme.Colors.negative)
-                    .foregroundStyle(.white)
+                    .background(isPositive ? Theme.Colors.positive.opacity(0.1) : Theme.Colors.negative.opacity(0.1))
+                    .foregroundStyle(isPositive ? Theme.Colors.positive : Theme.Colors.negative)
                     .clipShape(Capsule())
             } else {
                 Text(value)

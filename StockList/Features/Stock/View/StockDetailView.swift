@@ -16,10 +16,10 @@ struct StockDetailView: View {
             Theme.Colors.background.ignoresSafeArea()
 
             ScrollView {
-                VStack(alignment: .leading, spacing: Theme.Spacing.lg) {
-                    header
+            VStack(alignment: .leading, spacing: Theme.Spacing.lg) {
+                header
 
-                    if let detail = viewModel.detail {
+                if let detail = viewModel.detail {
                         StockMetricCardView {
                             StockMetricRowView(title: "Price", value: Formatters.currency(detail.price), isPositive: nil)
                             Divider()
@@ -70,6 +70,7 @@ struct StockDetailView: View {
                 .foregroundStyle(Theme.Colors.primaryText)
                 .lineLimit(2)
                 .minimumScaleFactor(0.8)
+                .accessibilityIdentifier("detail.name")
             Text(viewModel.detail?.symbol ?? detail.symbol)
                 .font(Theme.Fonts.subtitle)
                 .foregroundStyle(Theme.Colors.secondaryText)
