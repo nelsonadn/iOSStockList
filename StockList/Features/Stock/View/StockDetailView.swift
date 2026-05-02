@@ -14,22 +14,16 @@ struct StockDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Theme.Spacing.lg) {
-                HStack {
-                    Spacer()
-                    if viewModel.isLoading {
-                        ProgressView()
-                    }
-                }
-
                 header
 
                 if let detail = viewModel.detail {
                     StockMetricCardView {
-                        StockMetricRowView(title: "Price", value: Formatters.currency(detail.price))
+                        StockMetricRowView(title: "Price", value: Formatters.currency(detail.price), isPositive: nil)
                         Divider()
                         StockMetricRowView(
                             title: "Change",
-                            value: Formatters.change(detail.change)
+                            value: Formatters.change(detail.change),
+                            isPositive: detail.change >= 0
                         )
                     }
 
@@ -55,6 +49,14 @@ struct StockDetailView: View {
                 }
             }
             .padding()
+        }
+        .overlay(alignment: .topTrailing) {
+            if viewModel.isLoading {
+                ProgressView()
+                    .padding(.top, Theme.Spacing.sm)
+                    .padding(.trailing, Theme.Spacing.sm)
+                    .allowsHitTesting(false)
+            }
         }
         .task {
             viewModel.setDetail(detail)
