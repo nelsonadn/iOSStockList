@@ -66,12 +66,12 @@ struct StockDetailView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.sm) {
             Text(viewModel.detail?.name ?? detail.name)
-                .font(.system(size: 42, weight: .bold, design: .default))
+                .font(.custom("Avenir Next", size: 42).weight(.bold))
                 .foregroundStyle(Theme.Colors.primaryText)
                 .lineLimit(2)
                 .minimumScaleFactor(0.8)
             Text(viewModel.detail?.symbol ?? detail.symbol)
-                .font(.system(size: 22, weight: .regular, design: .default))
+                .font(Theme.Fonts.subtitle)
                 .foregroundStyle(Theme.Colors.secondaryText)
         }
     }

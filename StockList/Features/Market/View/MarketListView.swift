@@ -53,28 +53,28 @@ struct MarketListView: View {
                             )
                         )
                     } label: {
-                        VStack(alignment: .leading, spacing: Theme.Spacing.xs) {
-                            HStack {
-                                Text(quote.name)
-                                    .font(.headline)
-                                Spacer()
-                                Text(Formatters.currency(quote.price))
-                                    .font(.headline)
-                            }
-
-                            HStack {
-                                Text(quote.symbol)
-                                    .font(.subheadline)
-                                    .foregroundStyle(Theme.Colors.secondaryText)
-                                Spacer()
-                                HStack(spacing: Theme.Spacing.xs) {
-                                    Text(Formatters.change(quote.change))
-                                    Text(Formatters.percent(quote.changePercent))
+                            VStack(alignment: .leading, spacing: Theme.Spacing.xs) {
+                                HStack {
+                                    Text(quote.name)
+                                        .font(Theme.Fonts.headline)
+                                    Spacer()
+                                    Text(Formatters.currency(quote.price))
+                                        .font(Theme.Fonts.headline)
                                 }
-                                .font(.caption.bold())
-                                .padding(.horizontal, Theme.Spacing.sm)
-                                .padding(.vertical, Theme.Spacing.xs)
-                                .background(quote.change >= 0 ? Theme.Colors.positive : Theme.Colors.negative)
+
+                                HStack {
+                                    Text(quote.symbol)
+                                        .font(Theme.Fonts.subtitle)
+                                        .foregroundStyle(Theme.Colors.secondaryText)
+                                    Spacer()
+                                    HStack(spacing: Theme.Spacing.xs) {
+                                        Text(Formatters.change(quote.change))
+                                        Text(Formatters.percent(quote.changePercent))
+                                    }
+                                    .font(Theme.Fonts.caption.weight(.bold))
+                                    .padding(.horizontal, Theme.Spacing.sm)
+                                    .padding(.vertical, Theme.Spacing.xs)
+                                    .background(quote.change >= 0 ? Theme.Colors.positive : Theme.Colors.negative)
                                 .foregroundStyle(.white)
                                 .clipShape(Capsule())
                             }

@@ -10,7 +10,7 @@ import SwiftUI
 struct MarketHeaderView: View {
     var body: some View {
         Text("Stocks")
-            .font(.system(size: 36, weight: .bold, design: .default))
+            .font(Theme.Fonts.title)
             .foregroundStyle(Theme.Colors.primaryText)
     }
 }
