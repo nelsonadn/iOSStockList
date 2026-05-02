@@ -17,4 +17,23 @@ enum Formatters {
         guard let value else { return "-" }
         return value.formatted(.number.precision(.fractionLength(2))) + "%"
     }
+
+    static func change(_ value: Double?) -> String {
+        guard let value else { return "-" }
+        let sign = value >= 0 ? "+" : ""
+        return "\(sign)\(currency(value))"
+    }
+
+    static func range(min: Double?, max: Double?) -> String {
+        "\(currency(min)) - \(currency(max))"
+    }
+
+    static func textRange(_ value: String?) -> String {
+        value?.isEmpty == false ? value! : "-"
+    }
+
+    static func time(_ value: Date?) -> String {
+        guard let value else { return "-" }
+        return value.formatted(date: .omitted, time: .shortened)
+    }
 }
