@@ -6,6 +6,14 @@
 //
 
 import Foundation
+import Combine
 
+@MainActor
 final class StockDetailViewModel {
+    @Published private(set) var detail: StockDetail?
+    @Published private(set) var isLoading = false
+
+    func setDetail(_ detail: StockDetail) {
+        self.detail = detail
+    }
 }
