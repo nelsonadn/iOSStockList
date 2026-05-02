@@ -8,7 +8,20 @@
 import SwiftUI
 
 struct StockMetricRowView: View {
+    let title: String
+    let value: String
+
     var body: some View {
-        EmptyView()
+        HStack {
+            Text(title)
+                .font(Theme.Fonts.body)
+                .foregroundStyle(Theme.Colors.primaryText)
+            Spacer()
+            Text(value)
+                .font(Theme.Fonts.body)
+                .foregroundStyle(Theme.Colors.primaryText)
+                .multilineTextAlignment(.trailing)
+        }
+        .padding(.vertical, Theme.Spacing.sm)
     }
 }

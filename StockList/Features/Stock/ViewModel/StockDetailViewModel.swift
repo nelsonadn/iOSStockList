@@ -14,6 +14,8 @@ final class StockDetailViewModel: ObservableObject {
     @Published private(set) var isLoading = false
 
     func setDetail(_ detail: StockDetail) {
+        isLoading = true
         self.detail = detail
+        isLoading = false
     }
 }
