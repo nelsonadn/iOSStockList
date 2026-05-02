@@ -29,6 +29,7 @@ struct MarketListView: View {
 
                 TextField("Search stocks by name", text: $viewModel.searchText)
                     .textFieldStyle(.roundedBorder)
+                    .accessibilityIdentifier("market.searchField")
                     .onTapGesture {
                         dismissKeyboard()
                     }
@@ -74,12 +75,13 @@ struct MarketListView: View {
                                     .font(Theme.Fonts.caption.weight(.bold))
                                     .padding(.horizontal, Theme.Spacing.sm)
                                     .padding(.vertical, Theme.Spacing.xs)
-                                    .background(quote.change >= 0 ? Theme.Colors.positive : Theme.Colors.negative)
-                                .foregroundStyle(.white)
-                                .clipShape(Capsule())
+                                    .background(quote.change >= 0 ? Theme.Colors.positive.opacity(0.1) : Theme.Colors.negative.opacity(0.1))
+                                    .foregroundStyle(quote.change >= 0 ? Theme.Colors.positive : Theme.Colors.negative)
+                                    .clipShape(Capsule())
                             }
                         }
                         .padding(.vertical, Theme.Spacing.xs)
+                        .accessibilityIdentifier("market.row.\(quote.symbol)")
                     }
                 }
                 .listStyle(.plain)
@@ -103,6 +105,9 @@ struct MarketListView: View {
                 await viewModel.loadQuotes()
                 lastUpdatedText = Self.timeStringNow()
             }
+        }
+        .onDisappear {
+            dismissKeyboard()
         }
     }
 
