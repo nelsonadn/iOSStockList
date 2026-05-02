@@ -78,10 +78,11 @@ struct MarketListView: View {
                 .listStyle(.plain)
             }
             .padding()
-            .contentShape(Rectangle())
-            .onTapGesture {
-                dismissKeyboard()
-            }
+            .simultaneousGesture(
+                TapGesture().onEnded {
+                    dismissKeyboard()
+                }
+            )
             .overlay(alignment: .topTrailing) {
                 if viewModel.isLoading {
                     ProgressView()
@@ -106,6 +107,10 @@ struct MarketListView: View {
     private static func timeStringNow() -> String {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
+        formatter.dateStyle = .none
+        formatter.timeZone = .current
+        formatter.locale = .current
+        formatter.dateFormat = "h:mm:ss a"
         return formatter.string(from: .now)
     }
 
