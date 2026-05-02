@@ -19,6 +19,10 @@ struct MarketSummaryItemDataTransferObject: Decodable {
     let symbol: String
     let shortName: String?
     let longName: String?
-    let regularMarketPrice: Double?
-    let regularMarketChange: Double?
+    let regularMarketPrice: RawValueBox?
+    let regularMarketChange: RawValueBox?
+}
+
+struct RawValueBox: Decodable {
+    let raw: Double?
 }

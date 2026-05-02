@@ -12,6 +12,7 @@ import Combine
 final class MarketListViewModel: ObservableObject {
     @Published private(set) var quotes: [StockQuote] = []
     @Published var searchText: String = ""
+    @Published private(set) var isLoading = false
 
     var filteredQuotes: [StockQuote] {
         guard !searchText.isEmpty else { return quotes }
@@ -28,6 +29,7 @@ final class MarketListViewModel: ObservableObject {
     func loadQuotes() async {
         guard let url = APIEndpoint.marketSummary.url else { return }
         let apiClient = APIClient()
+        isLoading = true
 
         do {
             let data = try await apiClient.fetchData(
@@ -49,8 +51,8 @@ final class MarketListViewModel: ObservableObject {
             print(response)
 
             quotes = response.marketSummaryResponse.result.compactMap { item in
-                guard let price = item.regularMarketPrice,
-                      let change = item.regularMarketChange else { return nil }
+                guard let price = item.regularMarketPrice?.raw,
+                      let change = item.regularMarketChange?.raw else { return nil }
 
                 return StockQuote(
                     symbol: item.symbol,
@@ -63,5 +65,7 @@ final class MarketListViewModel: ObservableObject {
             print("Market summary error: \(error)")
             quotes = []
         }
+
+        isLoading = false
     }
 }

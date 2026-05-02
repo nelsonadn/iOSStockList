@@ -13,6 +13,13 @@ struct MarketListView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: Theme.Spacing.md) {
+                HStack {
+                    Spacer()
+                    if viewModel.isLoading {
+                        ProgressView()
+                    }
+                }
+
                 MarketHeaderView()
 
                 Text("Auto-updating every 8 seconds")
@@ -68,6 +75,11 @@ struct MarketListView: View {
         }
         .task {
             await viewModel.loadQuotes()
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(Constants.refreshInterval))
+                if Task.isCancelled { break }
+                await viewModel.loadQuotes()
+            }
         }
     }
 }
