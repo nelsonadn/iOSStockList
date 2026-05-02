@@ -6,6 +6,22 @@
 //
 
 import Foundation
+import Combine
 
+@MainActor
 final class MarketListViewModel {
+    @Published private(set) var quotes: [StockQuote] = []
+    @Published var searchText: String = ""
+
+    var filteredQuotes: [StockQuote] {
+        guard !searchText.isEmpty else { return quotes }
+        return quotes.filter {
+            $0.name.localizedCaseInsensitiveContains(searchText) ||
+            $0.symbol.localizedCaseInsensitiveContains(searchText)
+        }
+    }
+
+    func setQuotes(_ quotes: [StockQuote]) {
+        self.quotes = quotes
+    }
 }
